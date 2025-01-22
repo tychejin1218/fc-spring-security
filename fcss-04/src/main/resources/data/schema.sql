@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `spring`.`users` (
+CREATE TABLE IF NOT EXISTS `sample`.`users` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `username` VARCHAR(100) NOT NULL,
     `password` VARCHAR(100) NOT NULL,
@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS `spring`.`users` (
     PRIMARY KEY (`id`)
 );
 
-CREATE TABLE IF NOT EXISTS `spring`.`authorities` (
+CREATE TABLE IF NOT EXISTS `sample`.`authorities` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `username` VARCHAR(100) NOT NULL,
     `authority` VARCHAR(100) NOT NULL,
