@@ -3,10 +3,10 @@ spring:
     name: fcss-07
   datasource:
     hikari:
-      jdbc-url: jdbc:mysql://localhost:3306/spring
+      jdbc-url: jdbc:mysql://localhost:3306/sample
       driver-class-name: com.mysql.cj.jdbc.Driver
-      username: root
-      password: admin
+      username: sample
+      password: password1!
   jpa:
     properties:
       hibernate:
