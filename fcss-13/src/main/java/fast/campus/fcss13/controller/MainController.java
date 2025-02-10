@@ -9,14 +9,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Slf4j
 @Controller
 public class MainController {
-    @GetMapping("/main")
-    public String main() {
-        return "main.html";
-    }
 
-    @PostMapping("/add")
-    public String add(@RequestParam String name) {
-        log.info("POST /add. name={}", name);
-        return "main.html";
-    }
+  @GetMapping("/main")
+  public String main() {
+    return "main.html";
+  }
+
+  @PostMapping("/add")
+  public String add(@RequestParam("name") String name) {
+    log.info("POST /add. name={}", name);
+    return "main.html";
+  }
 }
