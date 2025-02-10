@@ -18,29 +18,29 @@ import org.springframework.security.web.csrf.CsrfFilter;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final CsrfTokenLogger csrfTokenLogger;
+  private final CsrfTokenLogger csrfTokenLogger;
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
-    }
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+    return NoOpPasswordEncoder.getInstance();
+  }
 
-    @Bean
-    public UserDetailsManager userDetailsManager() {
-        UserDetailsManager userDetailsManager = new InMemoryUserDetailsManager();
-        userDetailsManager.createUser(User.withUsername("danny.kim")
-                .password("12345")
-                .build());
+  @Bean
+  public UserDetailsManager userDetailsManager() {
+    UserDetailsManager userDetailsManager = new InMemoryUserDetailsManager();
+    userDetailsManager.createUser(User.withUsername("danny.kim")
+        .password("12345")
+        .build());
 
-        return userDetailsManager;
-    }
+    return userDetailsManager;
+  }
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.httpBasic(Customizer.withDefaults());
+  @Bean
+  public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+    httpSecurity.httpBasic(Customizer.withDefaults());
 
-        httpSecurity.addFilterAfter(csrfTokenLogger, CsrfFilter.class);
+    httpSecurity.addFilterAfter(csrfTokenLogger, CsrfFilter.class);
 
-        return httpSecurity.build();
-    }
+    return httpSecurity.build();
+  }
 }
