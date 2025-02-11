@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 public class TestController {
-    @PostMapping("/test")
-    public String test() {
-        log.info("test method called");
-        return "hello";
-    }
+
+//  @CrossOrigin(origins = "http://localhost:8080")
+  @PostMapping("/test")
+  public String test() {
+    log.info("test method called");
+    return "hello";
+  }
 }
