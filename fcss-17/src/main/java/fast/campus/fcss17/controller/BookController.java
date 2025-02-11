@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class BookController {
 
-    private final BookService bookService;
+  private final BookService bookService;
 
-    @GetMapping("/api/v1/book/{name}")
-    public Employee getBook(@PathVariable String name) {
-        return bookService.getBooks(name);
-    }
+  @GetMapping("/api/v1/book/{name}")
+  public Employee getBook(@PathVariable String name) {
+    return bookService.getBooks(name);
+  }
 }
