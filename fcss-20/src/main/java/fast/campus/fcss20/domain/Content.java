@@ -1,6 +1,10 @@
 package fast.campus.fcss20.domain;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -9,11 +13,12 @@ import lombok.NoArgsConstructor;
 @Table(name = "contents")
 @NoArgsConstructor
 public class Content {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
 
-    private String name;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int id;
 
-    private String owner;
+  private String name;
+
+  private String owner;
 }

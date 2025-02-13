@@ -16,33 +16,34 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableMethodSecurity
 public class SecurityConfig {
-    @Bean
-    public UserDetailsService userDetailsService() {
-        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(User.withUsername("danny.kim")
-                .password("12345")
-                .build());
 
-        manager.createUser(User.withUsername("steve.kim")
-                .password("12345")
-                .build());
+  @Bean
+  public UserDetailsService userDetailsService() {
+    InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+    manager.createUser(User.withUsername("danny.kim")
+        .password("12345")
+        .build());
 
-        return manager;
-    }
+    manager.createUser(User.withUsername("steve.kim")
+        .password("12345")
+        .build());
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
-    }
+    return manager;
+  }
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.httpBasic(Customizer.withDefaults());
-        return httpSecurity.build();
-    }
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+    return NoOpPasswordEncoder.getInstance();
+  }
 
-    @Bean
-    public SecurityEvaluationContextExtension securityEvaluationContextExtension() {
-        return new SecurityEvaluationContextExtension();
-    }
+  @Bean
+  public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+    httpSecurity.httpBasic(Customizer.withDefaults());
+    return httpSecurity.build();
+  }
+
+  @Bean
+  public SecurityEvaluationContextExtension securityEvaluationContextExtension() {
+    return new SecurityEvaluationContextExtension();
+  }
 }
