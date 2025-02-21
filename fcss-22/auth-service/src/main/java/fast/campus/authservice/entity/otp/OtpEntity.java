@@ -1,6 +1,11 @@
 package fast.campus.authservice.entity.otp;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -9,22 +14,23 @@ import lombok.NoArgsConstructor;
 @Table(name = "otp")
 @NoArgsConstructor
 public class OtpEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
 
-    @Column
-    private String userId;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
 
-    @Column
-    private String otpCode;
+  @Column
+  private String userId;
 
-    public OtpEntity(String userId, String otpCode) {
-        this.userId = userId;
-        this.otpCode = otpCode;
-    }
+  @Column
+  private String otpCode;
 
-    public void renewOtp(String newOtpCode) {
-        this.otpCode = newOtpCode;
-    }
+  public OtpEntity(String userId, String otpCode) {
+    this.userId = userId;
+    this.otpCode = otpCode;
+  }
+
+  public void renewOtp(String newOtpCode) {
+    this.otpCode = newOtpCode;
+  }
 }
