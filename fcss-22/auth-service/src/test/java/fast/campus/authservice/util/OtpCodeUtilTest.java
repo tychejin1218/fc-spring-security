@@ -9,6 +9,7 @@ class OtpCodeUtilTest {
   @Test
   @DisplayName("6자리 숫자값이 나와야 함")
   public void test1() {
+
     // given & when
     String otp = OtpCodeUtil.generateOtpCode();
 

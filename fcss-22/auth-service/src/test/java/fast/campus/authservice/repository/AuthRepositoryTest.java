@@ -22,6 +22,12 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.transaction.support.TransactionOperations;
 
+/**
+ * AuthRepositoryTest는 AuthRepository 클래스의 동작을 테스트하는 단위 테스트 클래스
+ *
+ * <p>Mockito를 사용하여 UserJpaRepository와 OtpJpaRepository에 대한 Mock 객체를 생성하고, 트랜잭션 동작 없이 비즈니스 로직 동작을
+ * 검증합니다.</p>
+ */
 @ExtendWith(MockitoExtension.class)
 class AuthRepositoryTest {
 
@@ -33,25 +39,30 @@ class AuthRepositoryTest {
 
   AuthRepository sut;
 
+  /**
+   * 각 테스트 실행 전 SUT(System Under Test)를 설정
+   */
   @BeforeEach
   public void setup() {
     sut = new AuthRepository(
         otpJpaRepository,
         userJpaRepository,
-        TransactionOperations.withoutTransaction(),
-        TransactionOperations.withoutTransaction()
+        TransactionOperations.withoutTransaction(), // 읽기 트랜잭션 모의
+        TransactionOperations.withoutTransaction()  // 쓰기 트랜잭션 모의
     );
   }
 
   @Test
   @DisplayName("동일한 사용자 ID 로 사용자를 등록할 수 없다.")
   public void test1() {
+
     // given
     String userId = "danny.kim";
     UserEntity userEntity = new UserEntity(
         userId, "password"
     );
 
+    // Mock 리포지토리에서 이미 같은 ID를 가진 사용자가 존재하도록 설정
     given(userJpaRepository.findUserEntityByUserId(userId))
         .willReturn(Optional.of(userEntity));
 
@@ -64,12 +75,16 @@ class AuthRepositoryTest {
   @Test
   @DisplayName("사용자를 등록할 수 있다.")
   public void test2() {
+
     // given
     String userId = "danny.kim";
     String password = "1234";
+
+    // Mock 리포지토리에서 사용자가 존재하지 않는 경우를 설정
     given(userJpaRepository.findUserEntityByUserId(userId))
         .willReturn(Optional.empty());
 
+    // 등록되는 사용자 객체 정의 및 Mock 동작 설정
     User user = new User(userId, password);
     given(userJpaRepository.save(any()))
         .willReturn(user.toEntity());
@@ -86,9 +101,12 @@ class AuthRepositoryTest {
   @Test
   @DisplayName("사용자가 존재하면 OTP 값을 업데이트 한다.")
   public void test3() {
+
     // given
     String userId = "danny.kim";
     String otp = OtpCodeUtil.generateOtpCode();
+
+    // Mock 리포지토리에서 사용자에 해당하는 OTP 값을 찾을 수 있도록 설정
     OtpEntity otpEntity = new OtpEntity();
     given(otpJpaRepository.findOtpEntityByUserId(userId))
         .willReturn(Optional.of(otpEntity));
@@ -103,10 +121,12 @@ class AuthRepositoryTest {
   @Test
   @DisplayName("사용자가 존재하지 않으면 새로운 OTP 를 생성한다.")
   public void test4() {
+
     // given
     String userId = "danny.kim";
     String otp = OtpCodeUtil.generateOtpCode();
-    OtpEntity otpEntity = new OtpEntity();
+
+    // Mock 리포지토리에서 사용자에 해당하는 OTP 값이 존재하지 않는 경우를 설정
     given(otpJpaRepository.findOtpEntityByUserId(userId))
         .willReturn(Optional.empty());
 
