@@ -1,11 +1,11 @@
-CREATE TABLE IF NOT EXISTS `spring`.`users` (
+CREATE TABLE IF NOT EXISTS `sample`.`users` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `user_id` VARCHAR(45) NOT NULL,
     `password` TEXT NOT NULL,
     PRIMARY KEY (`id`)
 );
 
-CREATE TABLE IF NOT EXISTS `spring`.`otp` (
+CREATE TABLE IF NOT EXISTS `sample`.`otp` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `user_id` VARCHAR(45) NOT NULL,
     `otp_code` VARCHAR(45) NOT NULL,
