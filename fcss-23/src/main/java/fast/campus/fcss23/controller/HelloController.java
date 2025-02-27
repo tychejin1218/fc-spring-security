@@ -19,11 +19,15 @@ public class HelloController {
 
   @GetMapping("/hello/2")
   public Mono<String> hello2(Mono<Authentication> auth) {
+// Mono<Authentication> 객체 주입 스프링 프레임워크가 Mono<Authentication> 을 주입할 수 있음
     return auth.map(a -> "Hello, " + a.getName());
   }
 
   @GetMapping("/hello/3")
   public Mono<String> hello3() {
+// Authentication 객체의 출처
+// 리액티브 앱이기 때문에 ThreadLocal 에 의존한 SecurityContext 를 사용할 수 없음
+//  - 리액티브 앱을 위한 다른 컨텍스트 홀더 구현체인 ReactiveSecurityContextHolder 를 사용할 수 있음
     return ReactiveSecurityContextHolder.getContext()
         .map(SecurityContext::getAuthentication)
         .map(auth -> "Hello, " + auth.getName());

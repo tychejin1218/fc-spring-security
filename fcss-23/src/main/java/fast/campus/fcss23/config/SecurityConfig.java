@@ -25,6 +25,29 @@ import reactor.core.publisher.Mono;
 @EnableReactiveMethodSecurity
 public class SecurityConfig {
 
+  /**
+   * ReactiveUserDetailsService 설정
+   * <p>
+   * - MapReactiveUserDetailsService를 반환하며, 해당 방식은 인메모리 저장소처럼 메모리에 사용자 정보를 저장함.
+   * </p>
+   *
+   * <p>
+   * ### 커스텀 인증 흐름
+   * </p>
+   * <p>
+   * 리액티브 앱에서 커스텀 인증 논리를 구현하려면 `ReactiveAuthenticationManager` 인터페이스를 구현해야 함.
+   * </p>
+   *
+   * <ul>
+   *   <li>리액티브와 비-리액티브 아키텍처의 차이는 크지 않음</li>
+   *   <li>HTTP 요청을 가로채서 인증 처리 흐름 실행</li>
+   *   <li>인증 처리를 `ReactiveAuthenticationManager`에 위임</li>
+   *   <li>인증 관리자는 `ReactiveAuthenticationManager` 인터페이스를 구현해야 함</li>
+   *   <li>구체적인 사용자 상세 정보는 `ReactiveUserDetailsService`로부터 조회</li>
+   * </ul>
+   *
+   * @return ReactiveUserDetailsService 인스턴스를 반환
+   */
   @Bean
   public ReactiveUserDetailsService reactiveUserDetailsService() {
     UserDetails user = User.withUsername("danny.kim")
